@@ -80,6 +80,7 @@ class User{
                 ':password' => $this->password,
                 ':role' => $this->role
             ]);
+            header("location:../view/inscription.php");
         }
         public function login(){
             $conn = Database::getConnection();
@@ -91,13 +92,15 @@ class User{
                $_SESSION["userid"]=$useR["id"];
                $_SESSION["email"]=$useR["email"];
                $_SESSION["role"]=$useR["role"];
-               print_r($_SESSION["role"]);
-            //    if ($useR["type"]=="admin") {
-            //        header("location:./Admin/admin.php");
-            //     }else{
-            //      header("location:./Admin/client.php");
+               
+               if ($useR["role"]=="admin") {
+                   header("location:../view/admin/dashboard.php");
+                }else if($useR["role"]=="teacher"){
+                 header("location:../view/enseignant/index.php");
     
-            //    }
+               }else{
+                header ("location:../view/etudiant/index.php");
+               }
     
             }
         }

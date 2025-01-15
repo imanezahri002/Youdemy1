@@ -61,7 +61,7 @@ if (isset($_POST["login"])){
     $emailLog=$_POST["emailLog"];
     $passwordLog=$_POST["passwordLog"];
     $client=new User(null,null,$emailLog,$passwordLog,null);
-
+    $client->login();
 
 }
 

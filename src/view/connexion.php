@@ -20,7 +20,7 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form method="POST" action="Auth.php">
+                <form method="POST" action="../controller/Auth.php">
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                      <img src="imgs/sac-de-courses.png" alt="">
