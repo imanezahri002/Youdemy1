@@ -1,9 +1,10 @@
 <?php
-namespace app\model;
+namespace src\model;
+include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
 
-use app\config\Database;
+use src\model\Database;
 use PDO;
-
+use Exception;
 class User{
     private $id;
     private $firstname;
@@ -13,25 +14,12 @@ class User{
     private $role;
 
    
-        public function __call($name, $arguments)
-        {   if($name == "construct"){
-                if(count($arguments)== 2)
-                {
-                    $this->lastname=$arguments[0];
-                    $this->firstname=$arguments[1];
-                }
-                if(count ($arguments)== 4){
-                    $this->firstname=$arguments[0];
-                    $this->email=$arguments[1];     
-                    $this->password=$arguments[2];
-                    $this->lastname =$arguments[3];
-                    $this->role=$arguments[4];  
-                }}
-                if($name == "instanceWidthPasswordAndEmail"){
-                if(count ($arguments)== 2){
-                    $this->email=$arguments[0];     
-                    $this->password=$arguments[1];
-                }}
+        public function __construct($firstname,$lastname,$email,$password,$role){
+            $this->firstname=$firstname;
+            $this->lastname=$lastname;
+            $this->email=$email;
+            $this->password=$password;
+            $this->role=$role;
         }
     
     public function setFirstName($firstname){
@@ -71,6 +59,17 @@ class User{
         $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
         public function add() {
+            $conn = Database::getConnection();
+            $sql="SELECT * FROM user WHERE email=:email";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([":email" => $this->email]);
+            $useR = $stmt->fetch();
+            if ($useR) {
+
+                throw new Exception("the user is already registred");
+            }
+            
+
             $sql = "INSERT INTO user (nom, prenom, email, password, role) VALUES (:firstname, :lastname, :email, :password, :role)";
             $conn = Database::getConnection();
             $stmt = $conn->prepare($sql);
@@ -82,6 +81,25 @@ class User{
                 ':role' => $this->role
             ]);
         }
-        
+        public function login(){
+            $conn = Database::getConnection();
+            $sql="SELECT * FROM user WHERE email=:email";
+            $stmt=$conn->prepare($sql);
+            $stmt->execute([":email"=>$this->email]);
+            $useR=$stmt->fetch();
+            if($useR && password_verify($this->password,$useR["password"])){
+               $_SESSION["userid"]=$useR["id"];
+               $_SESSION["email"]=$useR["email"];
+               $_SESSION["role"]=$useR["role"];
+               print_r($_SESSION["role"]);
+            //    if ($useR["type"]=="admin") {
+            //        header("location:./Admin/admin.php");
+            //     }else{
+            //      header("location:./Admin/client.php");
+    
+            //    }
+    
+            }
+        }
 }
 ?>

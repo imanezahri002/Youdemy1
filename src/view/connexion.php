@@ -20,7 +20,7 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form method="POST">
+                <form method="POST" action="Auth.php">
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                      <img src="imgs/sac-de-courses.png" alt="">
@@ -28,27 +28,22 @@
                   </div>
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example17">Email address</label>
-                    <input name="email" type="email" id="form2Example17" class="form-control form-control-lg" />
-                    
+                    <input name="emailLog" type="email" id="form2Example17" class="form-control form-control-lg" />
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example27">Password</label>
-                    <input name="password" type="password" id="form2Example27" class="form-control form-control-lg" />
-                    
+                    <input name="passwordLog" type="password" id="form2Example27" class="form-control form-control-lg" />
                   </div>
 
                   <div class="pt-1 mb-4">
                     <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit" name="login">Login</button>
                   </div>
-
-                  <a class="small text-muted" href="#!">Forgot password?</a>
                   <p class="mb-1 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="inscription.php"
-                      style="color: #393f81;">Register here</a></p>
-                  
+                      style="color: #393f81;">Register here</a>
+                 </p>
                 </form>
 
               </div>

@@ -1,5 +1,6 @@
 <?php
-
+namespace src\model;
+use PDO;
 class Database
 {
     private static $host = "localhost";
