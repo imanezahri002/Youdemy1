@@ -1,0 +1,15 @@
+{
+    "name": "youcode/youdemy1",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "imanezahri002",
+            "email": "imanezh5@gmail.com"
+        }
+    ],
+    "require": {}
+}
