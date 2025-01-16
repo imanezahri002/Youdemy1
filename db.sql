@@ -15,4 +15,10 @@ CREATE TABLE Cours (
     user_id INT,                               
     FOREIGN KEY (user_id) REFERENCES user(id) 
 );
-
+--table categorie
+CREATE TABLE categorie (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(255) NOT NULL,        
+    id_cours INT,                       
+    FOREIGN KEY (id_cours) REFERENCES cours(id)  
+);
