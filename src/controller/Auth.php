@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
+include $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
 use src\model\User;
 
 $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $msg7 = $msg8 = "";
@@ -49,7 +49,7 @@ if (isset($_POST["register"])) {
         header("Location: ../view/inscription.php?msg1=$msg1&msg2=$msg2&msg3=$msg3&msg4=$msg4&msg5=$msg5&msg6=$msg6&msg7=$msg7&msg8=$msg8&f=$firstName");
         exit;
     }
-    $user=new User($firstName,$lastName,$email,$hashedpassword,$roles);
+    $user=new User($firstName,$lastName,$email,$hashedpassword,$roles,null);
     try{
         $user -> add();
     }catch (Exception $th) {
@@ -60,7 +60,7 @@ if (isset($_POST["register"])) {
 if (isset($_POST["login"])){
     $emailLog=$_POST["emailLog"];
     $passwordLog=$_POST["passwordLog"];
-    $client=new User(null,null,$emailLog,$passwordLog,null);
+    $client=new User(null,null,$emailLog,$passwordLog,null,null);
     $client->login();
 
 }

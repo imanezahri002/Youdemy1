@@ -1,7 +1,7 @@
 <?php
 namespace src\model;
 include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
-
+session_start();
 use src\model\Database;
 use PDO;
 use Exception;
@@ -12,14 +12,16 @@ class User{
     private $email;
     private $password;
     private $role;
+    private $status;
 
    
-        public function __construct($firstname,$lastname,$email,$password,$role){
+        public function __construct($firstname,$lastname,$email,$password,$role,$status){
             $this->firstname=$firstname;
             $this->lastname=$lastname;
             $this->email=$email;
             $this->password=$password;
             $this->role=$role;
+            $this->status=$status;
         }
     
     public function setFirstName($firstname){
@@ -52,11 +54,12 @@ class User{
     }
 
    public function display(){
-        $sql = "SELECT nom, prenom, email, password, role FROM user";
+        $sql = "SELECT nom, prenom, email, role,status FROM user WHERE role != 'admin'";
         $conn=Database::getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
         public function add() {
             $conn = Database::getConnection();
@@ -70,17 +73,22 @@ class User{
             }
             
 
-            $sql = "INSERT INTO user (nom, prenom, email, password, role) VALUES (:firstname, :lastname, :email, :password, :role)";
+            $sql = "INSERT INTO user (nom, prenom, email, password, role,status) VALUES (:firstname, :lastname, :email, :password, :role,:status)";
             $conn = Database::getConnection();
             $stmt = $conn->prepare($sql);
+            
             $stmt->execute([
                 ':firstname' => $this->firstname,
                 ':lastname' => $this->lastname,
                 ':email' => $this->email,
                 ':password' => $this->password,
-                ':role' => $this->role
+                ':role' => $this->role,
+                ':status'=>$this->role == 'teacher' ? 'desactive' : 'active'
             ]);
-            header("location:../view/inscription.php");
+           
+            if($this->role=='student'){
+                header ("location: ../view/etudiant/index.php");
+            }else  {header("location:../view/inscription.php");}
         }
         public function login(){
             $conn = Database::getConnection();
@@ -92,17 +100,24 @@ class User{
                $_SESSION["userid"]=$useR["id"];
                $_SESSION["email"]=$useR["email"];
                $_SESSION["role"]=$useR["role"];
+               $_SESSION["status"]=$useR["status"];
                
                if ($useR["role"]=="admin") {
-                   header("location:../view/admin/dashboard.php");
+                   header("location: ../view/admin/dashboard.php");
                 }else if($useR["role"]=="teacher"){
-                 header("location:../view/enseignant/index.php");
+                 header("location: ../view/enseignant/index.php");
     
                }else{
-                header ("location:../view/etudiant/index.php");
+                header ("location: ../view/etudiant/index.php");
                }
     
             }
+           
+        }
+        public static function logout() {
+            session_destroy();
+            header('location: ../view/connexion.php');
+            exit;
         }
 }
 ?>
