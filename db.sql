@@ -27,3 +27,6 @@ CREATE TABLE tag(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nom VARCHAR(50) NOT NULL
 );
+--add champ type dans table cours
+ALTER TABLE cours
+ADD COLUMN type ENUM('video','document');
