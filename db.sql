@@ -22,3 +22,8 @@ CREATE TABLE categorie (
     id_cours INT,                       
     FOREIGN KEY (id_cours) REFERENCES cours(id)  
 );
+--table tag
+CREATE TABLE tag(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nom VARCHAR(50) NOT NULL
+);

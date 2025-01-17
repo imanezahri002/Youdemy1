@@ -25,8 +25,7 @@ class Categorie{
             $sql="INSERT INTO categorie (nom) VALUES (:nom)";
             $conn=Database::getConnection();
             $stmt=$conn->prepare($sql);
-            $stmt->execute(['nom'=>$this->nom]);
-            header("location: ../../view/admin/categories.php");
+            $stmt->execute([':nom'=>$this->nom]);
         }
         public function display(){
             $sql="SELECT * FROM categorie";
@@ -34,7 +33,6 @@ class Categorie{
             $stmt=$conn->prepare($sql);
             $stmt->execute();
             $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-            
             return $data;
         }
         public function delete(){
@@ -42,6 +40,13 @@ class Categorie{
             $conn=Database::getConnection();
             $stmt=$conn->prepare($sql);
             $stmt->execute([':id'=>$this->id]);
+        }
+        public function edit(){
+            $sql="UPDATE categorie SET nom=:nom WHERE id=:id";
+            $conn=Database::getConnection();
+            $stmt=$conn->prepare($sql);
+            $stmt->execute([':nom'=>$this->nom,
+            'id'=>$this->id]);
         }
 
 }

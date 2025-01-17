@@ -1,6 +1,6 @@
 <?php
 
-use src\model\Categorie;
+use src\model\Tag;
 require_once __DIR__ . '/../../model/Categorie.php';
 
 if(!isset($_SESSION["email"])){
@@ -11,19 +11,36 @@ if ($_SESSION["role"] != 'admin') {
 };
 include 'layouts/header.php';
 include 'layouts/sidebar.php';
-
+//pour delete
 if(isset($_GET["id"])){
 	$id = $_GET["id"];
-	$delete=new Categorie($id,null);
+	$delete=new Tag($id,null);
 	$delete->delete();
-
 }
-if(isset($_POST["add"])){
 
-	$nomCat=$_POST["nomCat"];
-	$cat=new Categorie("",$nomCat);
-	$cat->add();
-	header("location:./categories.php");
+//pour ajout
+if (isset($_POST["add"])) {
+            $nomTag = $_POST["nomTag"];
+            $tg = new Tag("", $nomTag);
+            $tg->add();
+            header("location:./tags.php");
+}
+// Récupérer les informations du tag à éditer
+
+if (isset($_GET["edit_id"])) {
+    $editId = $_GET["edit_id"];
+    $editTag = new Tag($editId, "");
+    $editTag = $editTag->getTagById();
+}
+
+// Modifier un tag
+if (isset($_POST["edit"])) {
+    $id = $_POST["editId"];
+    $nomTag = $_POST["nomTag"];
+    $tg = new Tag($id, $nomTag);
+    $tg->edit();
+    header("location: ./tags.php");
+    exit();
 }
 ?>
 
@@ -57,7 +74,7 @@ if(isset($_POST["add"])){
 					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Categories</a>
+							<a href="#">Tags</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -69,13 +86,16 @@ if(isset($_POST["add"])){
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Categories</h3>
+						<h3>Recent Tags</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
 					<form action="" method="POST" style="margin-bottom:30px">
-						<input type="text" style="width:250px;height:30px" placeholder="Nom Categorie" name="nomCat">
-						<button type="submit" style="width:150px;height:30px" name="add">Add</button>
+                        <input type="hidden" name="editId" value="<?php echo isset($editTag['id']) ? $editTag['id'] : ''; ?>">
+						<input type="text" style="width:250px;height:30px" placeholder="Nom Tag" name="nomTag" value="<?php echo isset($editTag['nom']) ? $editTag['nom'] : ''; ?>">
+						<button type="submit" style="width:150px;height:30px" name="<?php echo isset($editTag['id']) ? 'edit' : 'add'; ?>">
+                        <?php echo isset($editTag['id']) ? 'Edit' : 'Add'; ?>
+                        </button>
 					</form>
 					<table>
 						<thead>
@@ -86,18 +106,9 @@ if(isset($_POST["add"])){
 						</thead>
 						<tbody>
 						<?php
-                    $cat=new Categorie("","");
-                    $datas=$cat->display();
-                    foreach ($datas as $data) {?>
-							<tr>
-                            <td><?php echo $data["nom"] ?></td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-pen-to-square fa-xl" style="color: #3c91e6;"></i></a>
-                                <a href="categories.php?id=<?=$data['id']?>"><i class="fa-solid fa-trash fa-xl" style="color: #ff425f;"></i></a>
-                            </td>
-                        </tr>
-                   <?php }
-                    ?>
+                        $tg=new Tag("","");
+                        $tg->display();
+                        ?>
 						</tbody>
 					</table>
 				</div>
@@ -105,10 +116,6 @@ if(isset($_POST["add"])){
 		</main>
 		<!-- MAIN -->
 	</section>
-	<?php
-		
-
-	?>
 	<!-- CONTENT -->
 	<?php
     include 'layouts/footer.php';
