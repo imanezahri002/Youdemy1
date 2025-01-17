@@ -25,15 +25,14 @@ if (isset($_POST["add"])) {
             $tg->add();
             header("location:./tags.php");
 }
-// Récupérer les informations du tag à éditer
+
 
 if (isset($_GET["edit_id"])) {
     $editId = $_GET["edit_id"];
     $editTag = new Tag($editId, "");
-    $editTag = $editTag->getTagById();
+    $editTag = $editTag->getById();
 }
 
-// Modifier un tag
 if (isset($_POST["edit"])) {
     $id = $_POST["editId"];
     $nomTag = $_POST["nomTag"];

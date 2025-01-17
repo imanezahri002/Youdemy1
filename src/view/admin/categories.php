@@ -16,14 +16,27 @@ if(isset($_GET["id"])){
 	$id = $_GET["id"];
 	$delete=new Categorie($id,null);
 	$delete->delete();
-
+	header("location: ./categories.php");
 }
 if(isset($_POST["add"])){
-
 	$nomCat=$_POST["nomCat"];
 	$cat=new Categorie("",$nomCat);
 	$cat->add();
 	header("location:./categories.php");
+}
+if (isset($_GET["edit_id"])) {
+    $editId = $_GET["edit_id"];
+    $editCat = new Categorie($editId, "");
+    $editCat = $editCat->getById();
+}
+
+if (isset($_POST["edit"])){
+	$editId=$_POST["edit_id"];
+	$editNom=$_POST["nomCat"];
+	$editCat=new Categorie($editId,$editNom);
+	$editCat->edit();
+	header("location: ./categories.php");
+	exit();
 }
 ?>
 
@@ -74,8 +87,11 @@ if(isset($_POST["add"])){
 						<i class='bx bx-filter' ></i>
 					</div>
 					<form action="" method="POST" style="margin-bottom:30px">
-						<input type="text" style="width:250px;height:30px" placeholder="Nom Categorie" name="nomCat">
-						<button type="submit" style="width:150px;height:30px" name="add">Add</button>
+						<input type="hidden" name="edit_id" value="<?php echo isset($editCat['id']) ? $editCat['id'] : ''; ?>">
+						<input type="text" style="width:250px;height:30px" placeholder="Nom Categorie" name="nomCat" value="<?php echo isset($editCat['nom']) ? $editCat['nom'] : ''; ?>">
+						<button type="submit" style="width:150px;height:30px" name="<?php if (isset($editCat['id'])) { echo 'edit';} else {echo 'add';}?>">
+							<?php	if (isset($editCat['id'])) { echo 'edit';} else {echo 'add';} ?>
+						</button>
 					</form>
 					<table>
 						<thead>
@@ -92,7 +108,7 @@ if(isset($_POST["add"])){
 							<tr>
                             <td><?php echo $data["nom"] ?></td>
                             <td>
-                                <a href=""><i class="fa-solid fa-pen-to-square fa-xl" style="color: #3c91e6;"></i></a>
+                                <a href="categories.php?edit_id=<?=$data['id']?>"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #3c91e6;"></i></a>
                                 <a href="categories.php?id=<?=$data['id']?>"><i class="fa-solid fa-trash fa-xl" style="color: #ff425f;"></i></a>
                             </td>
                         </tr>

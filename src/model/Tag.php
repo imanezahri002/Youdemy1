@@ -1,6 +1,6 @@
 <?php
 namespace src\model;
-include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
+include __DIR__ . '/../../vendor/autoload.php';
 use src\model\Database;
 use PDO;
 use Exception;
@@ -53,7 +53,7 @@ class Tag{
         $stmt->execute([':id'=>$this->id]);
     }
 
-    public function getTagById() {
+    public function getById() {
         $sql = "SELECT * FROM tag WHERE id = :id";
         $conn = Database::getConnection();
         $stmt = $conn->prepare($sql);

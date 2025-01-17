@@ -1,6 +1,6 @@
 <?php
 namespace src\model;
-include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
+include __DIR__ . '/../../vendor/autoload.php';
 session_start();
 use src\model\Database;
 use PDO;
@@ -41,13 +41,26 @@ class Categorie{
             $stmt=$conn->prepare($sql);
             $stmt->execute([':id'=>$this->id]);
         }
+        
+        public function getById(){
+            $sql="SELECT * FROM categorie WHERE id=:id";
+            $conn=Database::getConnection();
+            $stmt=$conn->prepare($sql);
+            $stmt->execute([':id'=>$this->id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        }
+        
         public function edit(){
             $sql="UPDATE categorie SET nom=:nom WHERE id=:id";
             $conn=Database::getConnection();
             $stmt=$conn->prepare($sql);
             $stmt->execute([':nom'=>$this->nom,
-            'id'=>$this->id]);
+            ':id'=>$this->id]);
+
         }
+        
+
 
 }
 ?>

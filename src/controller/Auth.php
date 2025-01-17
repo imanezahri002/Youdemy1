@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
+include __DIR__ . '/../../vendor/autoload.php';
 use src\model\User;
 
 $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $msg7 = $msg8 = "";
