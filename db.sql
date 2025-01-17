@@ -30,3 +30,12 @@ nom VARCHAR(50) NOT NULL
 --add champ type dans table cours
 ALTER TABLE cours
 ADD COLUMN type ENUM('video','document');
+
+--add table coursTag
+CREATE TABLE coursTag (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idcours INT,
+    idtag INT,
+    FOREIGN KEY (idcours) REFERENCES cours(id),
+    FOREIGN KEY (idtag) REFERENCES tag(id)
+);
