@@ -11,6 +11,18 @@ if ($_SESSION["role"] != 'admin') {
 };
 include 'layouts/header.php';
 include 'layouts/sidebar.php';
+
+if (isset($_POST["updata"])){
+	$id=$_POST["user_id"];
+	if($_POST["current_status"]=='active'){
+		$status='desactive';
+	}else{
+		$status='active';
+	};
+	$upstatus=new User(null,null,null,null,null,null);
+	$upstatus->updateStatus($id,$status);
+	header("location:./users.php");
+}
 ?>
 
 	<!-- CONTENT -->
@@ -66,8 +78,9 @@ include 'layouts/sidebar.php';
 								<th>firstName</th>
 								<th>lastName</th>
                                 <th>email</th>
-                                <th>role</th>
 								<th>Status</th>
+                                <th>role</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -76,12 +89,22 @@ include 'layouts/sidebar.php';
                     $datas=$user->display();
                     foreach ($datas as $data) {?>
                         
-							<tr>
+						<tr>
                             <td><?php echo $data["nom"] ?></td>
                             <td><?php echo $data["prenom"]?></td>
                             <td><?php echo $data["email"]?></td>
+							<td><?php echo $data["status"]?></td>
                             <td><?php echo $data["role"]?></td>
-                            <td><span class="status completed"><?php echo $data["status"]?></span></td>
+                            <td>
+								<form action="" method="POST">
+								<input type="hidden" name="user_id" value="<?php echo htmlspecialchars($data['id']);?>">
+								<input type="hidden" name="current_status" value="<?php echo htmlspecialchars($data['status']);?>">
+								<button type="submit" name="updata" class="status <?php echo $data["status"] == 'active' ? 'banner' : 'completed'; ?>">
+									<?php echo $data['status'] == 'active' ? 'Deactivate' : 'Activate'; ?>
+									</button>
+								</form>
+							</td>
+							
                         </tr>
                    <?php }
                     ?>
@@ -93,6 +116,7 @@ include 'layouts/sidebar.php';
 		</main>
 		<!-- MAIN -->
 	</section>
+
 	<!-- CONTENT -->
 	<?php
     include 'layouts/footer.php';

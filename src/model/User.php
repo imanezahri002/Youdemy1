@@ -1,6 +1,6 @@
 <?php
 namespace src\model;
-include_once $_SERVER['DOCUMENT_ROOT']."/YouDemy1/vendor/autoload.php";
+include __DIR__ . '/../../vendor/autoload.php';
 session_start();
 use src\model\Database;
 use PDO;
@@ -16,6 +16,7 @@ class User{
 
    
         public function __construct($firstname,$lastname,$email,$password,$role,$status){
+            
             $this->firstname=$firstname;
             $this->lastname=$lastname;
             $this->email=$email;
@@ -54,7 +55,7 @@ class User{
     }
 
    public function display(){
-        $sql = "SELECT nom, prenom, email, role,status FROM user WHERE role != 'admin'";
+        $sql = "SELECT * FROM user WHERE role != 'admin'";
         $conn=Database::getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -98,18 +99,26 @@ class User{
             $useR=$stmt->fetch();
             if($useR && password_verify($this->password,$useR["password"])){
                $_SESSION["userid"]=$useR["id"];
+               $_SESSION["userName"]=$useR["nom"];
                $_SESSION["email"]=$useR["email"];
                $_SESSION["role"]=$useR["role"];
                $_SESSION["status"]=$useR["status"];
-               
+               $_SESSION["message"]="";
                if ($useR["role"]=="admin") {
+                    $_SESSION["message"]="";
                    header("location: ../view/admin/dashboard.php");
-                }else if($useR["role"]=="teacher"){
+                }else if($useR["role"]=="teacher" && $useR["status"]=="active"){
+                    $_SESSION["message"]="";
                  header("location: ../view/enseignant/index.php");
     
-               }else{
+               }else if($useR["role"]=="student" && $useR["status"]=="active"){
+                    $_SESSION["message"]="";
                 header ("location: ../view/etudiant/index.php");
-               }
+               }else {
+                $_SESSION["message"]="veuillez attender l'activation de votre compte Merci pour votre comprehension";
+                header ("location: ../view/connexion.php");
+                 
+                }
     
             }
            
@@ -118,6 +127,15 @@ class User{
             session_destroy();
             header('location: ../view/connexion.php');
             exit;
+        }
+        public function updateStatus($id,$status){
+            $sql="UPDATE user SET status=:status WHERE id=:id";
+            $conn=Database::getConnection();
+            $stmt=$conn->prepare($sql);
+            $stmt->execute([
+                ":status"=>$status,
+                ":id"=>$id
+            ]);
         }
 }
 ?>

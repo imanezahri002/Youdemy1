@@ -122,8 +122,6 @@ if (isset($_POST["edit"])){
 		<!-- MAIN -->
 	</section>
 	<?php
-		
-
 	?>
 	<!-- CONTENT -->
 	<?php

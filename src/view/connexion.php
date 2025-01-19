@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,14 +31,15 @@
                   </div>
 
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                  <span style="color:red ;font-size:25px;"><?php echo isset($_SESSION["message"])? $_SESSION["message"]:"" ?></span>
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example17">Email address</label>
-                    <input name="emailLog" type="email" id="form2Example17" class="form-control form-control-lg" />
+                    <input name="emailLog" type="email" id="form2Example17" class="form-control form-control-lg" required/>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
                     <label class="form-label" for="form2Example27">Password</label>
-                    <input name="passwordLog" type="password" id="form2Example27" class="form-control form-control-lg" />
+                    <input name="passwordLog" type="password" id="form2Example27" class="form-control form-control-lg" required/>
                   </div>
 
                   <div class="pt-1 mb-4">

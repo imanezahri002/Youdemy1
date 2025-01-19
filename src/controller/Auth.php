@@ -4,7 +4,7 @@ use src\model\User;
 
 $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $msg7 = $msg8 = "";
 
-// Récupérer les données soumises par le formulaire
+
 if (isset($_POST["register"])) {
     $firstName = trim($_POST['firstName']);
     $lastName = trim($_POST['lastName']);

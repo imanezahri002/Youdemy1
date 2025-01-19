@@ -38,7 +38,8 @@ include './layouts/sidebar.php';
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>HELLO <span style="color:#3C91E6"><?php if(isset($_SESSION["userName"])){echo $_SESSION["userName"];}else{echo "";}?></span></h1>
+					<h3>Dashboard</h3>
 					<ul class="breadcrumb">
 						<li>
 							<a href="#">Dashboard</a>

@@ -10,17 +10,17 @@ $current_page = basename($_SERVER['PHP_SELF']); //PHP_SELF:
     </a>
     <ul class="side-menu top">
         <!-- Dashboard -->
-        <li class="<?php echo ($current_page === 'dashboard.php') ? 'active' : ''; ?>">
-            <a href="dashboard.php">
+        <li class="<?php echo ($current_page === 'index.php') ? 'active' : ''; ?>">
+            <a href="index.php">
                 <i class='bx bxs-dashboard' ></i>
                 <span class="text">Dashboard</span>
             </a>
         </li>
         <!-- Users -->
-        <li class="<?php echo ($current_page === 'users.php') ? 'active' : ''; ?>">
-            <a href="users.php">
+        <li class="<?php echo ($current_page === 'Mycours.php') ? 'active' : ''; ?>">
+            <a href="Mycours.php">
                 <i class='bx bxs-shopping-bag-alt' ></i>
-                <span class="text">Users</span>
+                <span class="text">Mes Cours</span>
             </a>
         </li>
         <!-- Cours -->

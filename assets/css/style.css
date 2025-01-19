@@ -29,6 +29,7 @@ li {
 	--light-yellow: #FFF2C6;
 	--orange: #FD7238;
 	--light-orange: #FFE0D3;
+
 }
 
 html {
@@ -484,7 +485,9 @@ body {
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);
 }
-
+#content main .table-data .order table tr td .status.banner {
+	background: var(--red);
+}
 
 #content main .table-data .todo {
 	flex-grow: 1;
@@ -589,4 +592,108 @@ body {
 	#content main .table-data .todo .todo-list {
 		min-width: 420px;
 	}
+}
+/* Conteneur principal */
+.main-content {
+    padding: 20px;
+    margin-left:auto;
+}
+.main-content .titleC{
+	margin-bottom:12px ;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+
+.course-card {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px; 
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+	max-width: 300px;
+	max-height: 400px;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); 
+}
+
+
+.course-thumbnail {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; 
+}
+
+/* Corps de la carte */
+.course-body {
+    padding: 1.25rem; /* Espacement interne, comme Bootstrap */
+}
+
+/* Titre du cours */
+.course-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+    color: #333;
+}
+
+/* Description du cours */
+.course-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 1rem;
+}
+
+/* Métadonnées du cours */
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.course-price {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Tags du cours */
+.course-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: #e9ecef;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+/* Bouton "Choisir" */
+.choose-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: #007bff; /* Couleur primaire de Bootstrap */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.choose-button:hover {
+    background-color: #0056b3; /* Couleur plus foncée au survol */
 }
