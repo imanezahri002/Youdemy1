@@ -39,3 +39,6 @@ CREATE TABLE coursTag (
     FOREIGN KEY (idcours) REFERENCES cours(id),
     FOREIGN KEY (idtag) REFERENCES tag(id)
 );
+--add column image 
+ALTER TABLE cours
+ADD COLUMN image VARCHAR(255) NOT NULL;
