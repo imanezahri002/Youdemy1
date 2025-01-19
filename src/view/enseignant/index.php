@@ -42,11 +42,11 @@ include './layouts/sidebar.php';
 					<h3>Dashboard</h3>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Dashboard</a>
+						<a href="#" style="text-decoration:none">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Home</a>
+						<a class="active" href="#" style="text-decoration:none">Home</a>
 						</li>
 					</ul>
 				</div>

@@ -395,12 +395,12 @@ body {
 	background: var(--light-orange);
 	color: var(--orange);
 }
-#content main .box-info li .text h3 {
+#content main .box-info li .text1 h3 {
 	font-size: 24px;
 	font-weight: 600;
 	color: var(--dark);
 }
-#content main .box-info li .text p {
+#content main .box-info li .text1 p {
 	color: var(--dark);	
 }
 
