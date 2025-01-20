@@ -45,3 +45,8 @@ ADD COLUMN image VARCHAR(255) NOT NULL;
 -- add champ price 
 ALTER TABLE cours
 ADD COLUMN prix DECIMAL(4,2) NOT NULL;
+--add champ id_category 
+ALTER TABLE cours
+ADD CONSTRAINT fk_cours_categorie
+FOREIGN KEY (category_id)
+REFERENCES categorie(id);
