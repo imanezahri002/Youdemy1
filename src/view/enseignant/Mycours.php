@@ -1,8 +1,13 @@
 <?php
 use src\model\Tag;
 use src\model\Categorie;
+
+use src\model\Teacher;
+
 require_once __DIR__ . '/../../model/Tag.php';
-require_once __DIR__. '/../../model/Categorie.php';
+require_once __DIR__ . '/../../model/Categorie.php';
+
+require_once __DIR__ . '/../../model/Teacher.php';
 
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
@@ -21,7 +26,12 @@ if(isset($_POST["save"])){
 	$tagSel=$_POST["tagSel"];
 	$contenu=$_POST["contenu"];
 	$img=$_POST["img"];
+	$userid=$_SESSION["userid"];
+	$userRole=$_SESSION["role"];
+	$cour=new Teacher("","","","","","");
+	$cour->addCours($title,$description,$type,$img,$contenu,$price,$userid,$categorie,$tagSel);
 }
+
 ?>
 <section id="content">
 		<!-- NAVBAR -->
@@ -63,9 +73,9 @@ if(isset($_POST["save"])){
             <div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Cours</h3> 
+						<h3>Recent Cours</h3>
 						 <i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i> 
+						<i class='bx bx-filter' ></i>
                          <form action="" method="POST">
                         <button name="add" type="submit" style="background-color:#3C91E6;color:#ffff;width:70px;height:30px;border-radius:20px;border:none;cursor:pointer" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Add  <i class="fa-solid fa-plus fa-lg" style="color:rgb(255, 255, 255);"></i>
@@ -152,7 +162,7 @@ if(isset($_POST["save"])){
                 </div>
             </div>
             <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" name="save">Ajouter</button>
+                                  <button type="submit" class="btn btn-primary" name="save">Ajouter</button>
                                 </div>
                                 </div>
                             </div>
@@ -162,20 +172,29 @@ if(isset($_POST["save"])){
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Type</th>
+								<th>Price</th>
+								<th>Category</th>
 							</tr>
 						</thead>
 						<tbody>
+								<?php
+									$course=new Teacher("","","","","");
+									$courses=$course->display();
+									foreach ($courses as $course) {?>
+										
+								
 							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
+								<td><?php echo $course["titre"] ?></td>
+								<td><?php echo $course["description"] ?></td>
+								<td><?php echo $course[""] ?></td>
+								<td><?php echo $course["type"] ?></td>
+								<td><span class="status completed">Completed</span><td><?php echo $course["prix"] ?></td></td>
 							</tr>
+							<?php } ?>
+							
 							<tr>
 								<td>
 									<img src="img/people.png">

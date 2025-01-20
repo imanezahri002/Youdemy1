@@ -1,7 +1,7 @@
 <?php
 namespace src\model;
 include __DIR__ . '/../../vendor/autoload.php';
-session_start();
+// session_start();
 use src\model\Database;
 use PDO;
 use Exception;

@@ -1,5 +1,10 @@
 <?php
-abstract class Cours{
+namespace src\model;
+include __DIR__ . '/../../vendor/autoload.php';
+use src\model\Database;
+use PDO;
+use Exception;
+abstract class Cour{
     protected $id;
     protected $titre;
     protected $description;
@@ -15,13 +20,16 @@ abstract class Cours{
         $this->type=$type;
         $this->image=$image;
         $this->contenu=$contenu;
-        $thos->prix=$prix;
+        $this->prix=$prix;
     }
     public function getTitre(){
         return $this->titre;
     }
     public function getDescription(){
         return $this->description;
+    }
+    public function getContenu(){
+        return $this->contenu;
     }
     public function getType(){
         return $this->type;
@@ -48,10 +56,5 @@ abstract class Cours{
         $this->prix=$prix;
     }
     abstract public function display();
-
-
-    public function add(){
-        $sql="INSERT INTO cours (titre,contenu,user_id,description,type,image) VALUES ()";
-    }
 }
 ?>
