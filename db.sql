@@ -42,3 +42,6 @@ CREATE TABLE coursTag (
 --add column image 
 ALTER TABLE cours
 ADD COLUMN image VARCHAR(255) NOT NULL;
+-- add champ price 
+ALTER TABLE cours
+ADD COLUMN prix DECIMAL(4,2) NOT NULL;

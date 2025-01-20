@@ -68,6 +68,14 @@ class Tag{
         $stmt->execute([':nom'=>$this->nom,
         'id'=>$this->id]);
     }
+    public function tags(){
+        $sql="SELECT * FROM tag";
+        $conn=Database::getConnection();
+        $stmt=$conn->prepare($sql);
+        $stmt->execute();
+        $tags=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $tags;
+    }
 }
 
 ?>

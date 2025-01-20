@@ -1,6 +1,9 @@
 <?php
+use src\model\Tag;
+use src\model\Categorie;
+require_once __DIR__ . '/../../model/Tag.php';
+require_once __DIR__. '/../../model/Categorie.php';
 
-session_start();
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
 };
@@ -9,8 +12,16 @@ if ($_SESSION["role"] != 'teacher') {
 };
 include './layouts/header.php';
 include './layouts/sidebar.php';
-
-
+if(isset($_POST["save"])){
+	$title=$_POST["title"];
+	$description=$_POST["description"];
+	$price=$_POST["price"];
+	$type=$_POST["type"];
+	$categorie=$_POST["categorie"];
+	$tagSel=$_POST["tagSel"];
+	$contenu=$_POST["contenu"];
+	$img=$_POST["img"];
+}
 ?>
 <section id="content">
 		<!-- NAVBAR -->
@@ -32,7 +43,7 @@ include './layouts/sidebar.php';
 				<img src="img/people.png">
 			</a>
 		</nav>
-        <main>
+        <main> 
 			<div class="head-title">
 				<div class="left">
 
@@ -52,10 +63,10 @@ include './layouts/sidebar.php';
             <div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Cours</h3>
-						<!-- <i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i> -->
-                        <form action="" method="POST">
+						<h3>Recent Cours</h3> 
+						 <i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i> 
+                         <form action="" method="POST">
                         <button name="add" type="submit" style="background-color:#3C91E6;color:#ffff;width:70px;height:30px;border-radius:20px;border:none;cursor:pointer" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Add  <i class="fa-solid fa-plus fa-lg" style="color:rgb(255, 255, 255);"></i>
                         </button>
@@ -68,52 +79,74 @@ include './layouts/sidebar.php';
                                 </div>
                                 <div class="modal-body">
 
-            <div class="container mt-2">
+             <div class="container mt-2">
                     <form id="course-form" class="bg-light p-4 rounded shadow">
                         <div class="mb-3">
                             <label for="course-title" class="form-label">Titre du cours</label>
-                            <input type="text" class="form-control" id="course-title" required>
+                            <input type="text" name="title" class="form-control" id="course-title" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="course-description" class="form-label">Description</label>
-                            <textarea class="form-control" id="course-description" rows="4" required></textarea>
+                            <textarea class="form-control" name="description" id="course-description" rows="4" required></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="course-price" class="form-label">Prix (€)</label>
-                            <input type="number" class="form-control" id="course-price" step="0.01" required>
+                            <input type="number" name="price" class="form-control" id="course-price" step="0.01" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="course-type" class="form-label">Type</label>
-                            <select class="form-select" id="course-type" required>
+                            <select class="form-select" name="type" id="course-type" required>
                                 <option value="video">Vidéo</option>
                                 <option value="pdf">PDF</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="course-category" class="form-label">Catégorie</label>
-                            <select class="form-select" id="course-category" required>
-                                <option value="developpement">Développement Web</option>
-                                <option value="design">Design</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="business">Business</option>
+                            <select class="form-select" name="categorie" id="course-category" required>
+							<?php
+								$ct = new Categorie("", "");
+								$categories = $ct->display();
+								
+								foreach ($categories as $categorie){ ?>
+
+										<option value="<?php echo htmlspecialchars($categorie['id']); ?>">
+											<?php echo htmlspecialchars($categorie['nom']); ?>
+										</option>
+							<?php
+							}?>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label for="course-tags-input" class="form-label">Tags</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="course-tags-input" placeholder="Ajouter un tag">
-                                <button type="button" class="btn btn-primary" id="add-tag-btn">Ajouter</button>
+                            
+							<select name="tagSel[]" id="countries" multiple>
+								<?php
+            $test = new Tag("", "");
+            $tags = $test->tags();
+			foreach ($tags as $tag){ ?>
+
+                    <option value="<?php echo htmlspecialchars($tag['id']); ?>">
+                        <?php echo htmlspecialchars($tag['nom']); ?>
+                    </option>
+                <?php
+            }?>
+        </select>
                             </div>
-                            <div id="tags-list" class="d-flex flex-wrap gap-2 mt-2"></div>
+                            <!-- <div id="tags-list" class="d-flex flex-wrap gap-2 mt-2"></div> -->
                         </div>
 
                         <div class="mb-3">
                             <label for="course-content" class="form-label">Contenu</label>
-                            <input type="text" class="form-control" id="course-price" required placeholder="url vers video ou pdf">
+                            <input type="text" name="contenu" class="form-control" id="course-price" required placeholder="url vers video ou pdf">
+                        </div>
+                        <div class="mb-3">
+                            <label for="course-image" class="form-label">Image</label>
+                            <input type="text" name="img" class="form-control" id="course-price" required placeholder="url d'Image">
                         </div>
 
                 </div>
@@ -182,6 +215,23 @@ include './layouts/sidebar.php';
 			</div>
 		</main>
 	</section>
-<?php
+	<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+
+	<script>
+	new MultiSelectTag('countries', {
+    rounded: true,
+    shadow: true,
+    placeholder: 'Search',
+    tagColor: {
+        textColor: '#3C91E6',
+        borderColor: '#689fd6',
+        bgColor: '#CFE8FF',
+    },
+    onChange: function(values) {
+        console.log(values)
+    }
+})
+</script>
+ <?php
 include './layouts/footer.php';
 ?>
