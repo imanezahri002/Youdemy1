@@ -16,7 +16,7 @@ if ($_SESSION["role"] != 'teacher') {
     header("location: ../connexion.php");
 };
 include './layouts/header.php';
-include './layouts/sidebar.php';
+// include './layouts/sidebar.php';
 if(isset($_POST["save"])){
 	$title=$_POST["title"];
 	$description=$_POST["description"];
@@ -30,6 +30,13 @@ if(isset($_POST["save"])){
 	$userRole=$_SESSION["role"];
 	$cour=new Teacher("","","","","","");
 	$cour->addCours($title,$description,$type,$img,$contenu,$price,$userid,$categorie,$tagSel);
+}
+if(isset($_POST["delete"])){
+	$id=$_POST["id_delete"];
+	
+	$cc=new Teacher("","","","","","");
+	$cc->deleteCour($id);
+	header("location:./Mycours.php");
 }
 
 ?>
@@ -174,59 +181,37 @@ if(isset($_POST["save"])){
 							<tr>
 								<th>Title</th>
 								<th>Description</th>
+								<th>Category</th>
 								<th>Type</th>
 								<th>Price</th>
-								<th>Category</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
 								<?php
-									$course=new Teacher("","","","","");
-									$courses=$course->display();
-									foreach ($courses as $course) {?>
-										
-								
+									$course=new Teacher("","","","","","");
+									$courses=$course->displayCours();
+									 
+									foreach ($courses as $course) {
+										?>
+									
 							<tr>
 								<td><?php echo $course["titre"] ?></td>
 								<td><?php echo $course["description"] ?></td>
-								<td><?php echo $course[""] ?></td>
+								<td><?php echo $course["nom"] ?></td>
 								<td><?php echo $course["type"] ?></td>
-								<td><span class="status completed">Completed</span><td><?php echo $course["prix"] ?></td></td>
+								<td><span class="status completed"><?php echo $course["prix"] ?></span></td>
+								<td style="display:flex;justify-content:space-between"> 
+									<i class="fa-solid fa-eye fa-lg" style="color: #db504a;"></i>
+									<i class="fa-solid fa-pen-to-square fa-lg" style="color: #3c91e6;"></i>
+									<form action="#" method="POST">
+										<input type="hidden" name="id_delete" value="<?php echo $course['id'];?>">
+								    <button type="submit" name="delete"><i class="fa-solid fa-trash fa-lg" style="color: #f31b1b;"></i></button>
+									</form>
+							</td>
 							</tr>
 							<?php } ?>
 							
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
