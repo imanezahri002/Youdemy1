@@ -1,7 +1,9 @@
 <?php
 
 use src\model\User;
+use src\model\Admin;
 require_once __DIR__ . '/../../model/User.php';
+require_once __DIR__ . '/../../model/Admin.php';
 
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
@@ -21,6 +23,12 @@ if (isset($_POST["updata"])){
 	};
 	$upstatus=new User(null,null,null,null,null,null);
 	$upstatus->updateStatus($id,$status);
+	header("location:./users.php");
+}
+if(isset($_POST["delete"])){
+	$id=$_POST["user_id"];
+	$ad=new Admin("","","","","","");
+	$ad->deleteUser($id);
 	header("location:./users.php");
 }
 ?>
@@ -101,7 +109,9 @@ if (isset($_POST["updata"])){
 								<input type="hidden" name="current_status" value="<?php echo htmlspecialchars($data['status']);?>">
 								<button type="submit" name="updata" class="status <?php echo $data["status"] == 'active' ? 'banner' : 'completed'; ?>">
 									<?php echo $data['status'] == 'active' ? 'Deactivate' : 'Activate'; ?>
-									</button>
+								</button>
+								<button type="submit" name="delete" style="border:none;background-color:none;cursor:pointer;"><i class="fa-solid fa-trash fa-lg" style="color: #f31b1b;"></i></button>
+									
 								</form>
 							</td>
 							

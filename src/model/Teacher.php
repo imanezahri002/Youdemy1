@@ -1,10 +1,11 @@
 <?php
 namespace src\model;
+use src\model\User;
 use src\model\Cour;
 use src\model\Database;
 use PDO;
 use Exception;
-
+require_once __DIR__ . '/User.php';
 class Teacher extends User{
 
     public function addCours($title,$description,$type,$img,$contenu,$price,$userid,$categorie,$tagSel){

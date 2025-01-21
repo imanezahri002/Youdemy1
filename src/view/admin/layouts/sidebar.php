@@ -44,15 +44,10 @@ $current_page = basename($_SERVER['PHP_SELF']); //PHP_SELF:
                 <span class="text">Tags</span>
             </a>
         </li>
+       
     </ul>
     <ul class="side-menu">
-        <!-- Settings -->
-        <li class="<?php echo ($current_page === 'settings.php') ? 'active' : ''; ?>">
-            <a href="settings.php">
-                <i class='bx bxs-cog' ></i>
-                <span class="text">Settings</span>
-            </a>
-        </li>
+       
         <!-- Logout -->
         <li>
 
