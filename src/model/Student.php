@@ -59,6 +59,7 @@ class Student extends User{
         $cours=$stmt->fetchAll(PDO::FETCH_ASSOC);
         return $cours;
     }
+    
 }
 
 ?>

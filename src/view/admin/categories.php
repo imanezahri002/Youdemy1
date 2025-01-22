@@ -1,8 +1,7 @@
 <?php
-
 use src\model\Categorie;
 require_once __DIR__ . '/../../model/Categorie.php';
-
+session_start();
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
 };

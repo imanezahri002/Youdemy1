@@ -2,7 +2,7 @@
 
 use src\model\Tag;
 require_once __DIR__ . '/../../model/Categorie.php';
-
+session_start();
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
 };

@@ -19,7 +19,7 @@ if(isset($_GET["id_cour"])){
     $idstudent=$_SESSION["userid"];
     $idcours=$_GET["id_cour"];
     Student::addStudentCours($idcours,$idstudent);
-
+    
 }
 ?>
 <section id="content">
@@ -62,7 +62,7 @@ if(isset($_GET["id_cour"])){
                             <span class="course-price"><?php echo $cour['prix'] ?></span>
                         </div>
                         
-                        <a href="#"><button name="inscription" class="choose-button">Afficher</button></a>
+                        <a href="./details.php?id_detail=<?= $cour['id']?>&&type=<?=$cour['type']?>"><button name="inscription" class="choose-button">Afficher</button></a>
                     </div>
             </div>
         <?php }; ?>
