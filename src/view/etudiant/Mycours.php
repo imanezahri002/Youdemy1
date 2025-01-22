@@ -15,10 +15,15 @@ if ($_SESSION["role"] != 'student') {
 };
 include './layouts/header.php';
 include './layouts/aside.php';
+if(isset($_GET["id_cour"])){
+    $idstudent=$_SESSION["userid"];
+    $idcours=$_GET["id_cour"];
+    Student::addStudentCours($idcours,$idstudent);
 
+}
 ?>
 <section id="content">
-		<!-- NAVBAR -->
+		
 		<nav>
 			<i class='bx bx-menu' ></i>
 			<form action="#">
@@ -42,5 +47,26 @@ include './layouts/aside.php';
     <h1>HELLO <span style="color:#FD7238"><?php if(isset($_SESSION["userName"])){echo $_SESSION["userName"];}else{echo "";}?></span> </h1>
     <h2 class="titleC">Cours</h2>
 
-    
-</main>
+    <div class="course-grid" style="display: grid;grid-template-columns: auto auto auto; gap:20px;">
+        <?php
+            $id_user=$_SESSION["userid"];
+            $courstudent=Student::displayMycours($id_user);
+            foreach ($courstudent as $cour) { ?>
+
+            <div class="course-card">
+                    <img class="course-thumbnail" src="<?php echo $cour['image'] ?>">
+                    <div class="course-body">
+                        <h3 class="course-title"><?php echo $cour['titre'] ?></h3>
+                        <p class="course-description"><?php echo $cour['description'] ?></p>
+                        <div class="course-meta">
+                            <span class="course-price"><?php echo $cour['prix'] ?></span>
+                        </div>
+                        
+                        <a href="#"><button name="inscription" class="choose-button">Afficher</button></a>
+                    </div>
+            </div>
+        <?php }; ?>
+        
+    </div>
+
+    </main>

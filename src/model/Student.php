@@ -25,10 +25,39 @@ class Student extends User{
 
 
     }
-    public static function addStudentCours($idCour,$idStudent){
-        $sql="INSERT INTO subscription (student_id) VALUES (cours_id)";
-        
 
+    public static function addStudentCours($idCour,$idStudent){
+
+        $rqt="SELECT * FROM subscription WHERE student_id=:id_st AND cours_id=:id_cr";
+        $conn=Database::getConnection();
+        $stmt=$conn->prepare($rqt);
+        $stmt->execute([
+            ":id_st"=>$idStudent,
+            ":id_cr"=>$idCour
+        ]);
+        if($stmt->rowCount() == 0){
+
+            $sql="INSERT INTO subscription (student_id,cours_id) VALUES (:id_st,:id_cr)";
+            $conn=Database::getConnection();
+            $stmt=$conn->prepare($sql);
+            $stmt->execute([
+                ":id_st"=>$idStudent,
+                ":id_cr"=>$idCour
+            ]);
+        }
+
+    }
+    public static function displayMycours($id){
+        $sql="SELECT * FROM subscription s 
+                JOIN cours c ON s.cours_id= c.id  
+                WHERE s.student_id=:id";
+        $conn=Database::getConnection();
+        $stmt=$conn->prepare($sql);
+        $stmt->execute([
+            ":id"=>$id
+        ]);
+        $cours=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $cours;
     }
 }
 
