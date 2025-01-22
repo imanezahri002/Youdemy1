@@ -56,3 +56,12 @@ ADD CONSTRAINT fk_cours_id
 FOREIGN KEY (idcours)
 REFERENCES cours(id)
 ON DELETE CASCADE;
+
+--table inscription
+CREATE TABLE subscription (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    cours_id INT,
+    FOREIGN KEY (student_id) REFERENCES user(id),
+    FOREIGN KEY (cours_id) REFERENCES cours(id)
+);
