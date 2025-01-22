@@ -19,7 +19,7 @@ use src\model\Pdf;
         }else if($type=="pdf"){
            $obj=new Pdf($id,"","","","","","");
         }
-        $obj->displayContent();
+           $obj->displayContent();
     }
 
 ?>

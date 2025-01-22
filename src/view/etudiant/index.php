@@ -1,6 +1,12 @@
 <?php
 
-session_start();
+use src\model\Student;
+
+include '../../../vendor/autoload.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if(!isset($_SESSION["email"])){
     header("location: ../connexion.php");
 };
@@ -9,6 +15,7 @@ if ($_SESSION["role"] != 'student') {
 };
 include './layouts/header.php';
 include './layouts/aside.php';
+
 ?>
 <section id="content">
 		<!-- NAVBAR -->
@@ -30,30 +37,31 @@ include './layouts/aside.php';
 				<img src="img/people.png">
 			</a>
 		</nav>
+
+      
     <!-- Contenu principal -->
 <main class="main-content">
     <h1>HELLO <span style="color:#FD7238"><?php if(isset($_SESSION["userName"])){echo $_SESSION["userName"];}else{echo "";}?></span> </h1>
     <h2 class="titleC">Cours</h2>
-    <div class="course-grid">
+    <div class="course-grid" style="display: grid;grid-template-columns: auto auto auto;gap:20px;">
+        <?php
+            $courstudent=Student::displayCours();
+            foreach ($courstudent as $cour) { ?>
 
-        <!-- Carte de cours 2 -->
             <div class="course-card">
-                    <img class="course-thumbnail" src="cours-js-max.jpg" alt="Thumbnail du cours">
+                    <img class="course-thumbnail" src="<?php echo $cour['image'] ?>">
                     <div class="course-body">
-                        <h3 class="course-title">Titre du Cours 2</h3>
-                        <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
+                        <h3 class="course-title"><?php echo $cour['titre'] ?></h3>
+                        <p class="course-description"><?php echo $cour['description'] ?></p>
                         <div class="course-meta">
-                            <span class="course-teacher">Enseignant : Jane Smith</span>
-                            <span class="course-price">59,99 €</span>
+                            <span class="course-teacher"><?php echo $cour['nom'] ?></span>
+                            <span class="course-price"><?php echo $cour['prix'] ?></span>
                         </div>
-                        <div class="course-tags">
-                            <span class="tag">Design</span>
-                            <span class="tag">UI/UX</span>
-                        </div>
-                        <button class="choose-button">S'inscrire</button>
+                        
+                        <a href="./Mycours.php?id_cour=<?php echo $cour['id']; ?>"><button name="inscription" class="choose-button">S'inscrire</button></a>
                     </div>
             </div>
-
+        <?php }; ?>
         
     </div>
 </main>
