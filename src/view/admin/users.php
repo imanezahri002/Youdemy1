@@ -93,8 +93,8 @@ if(isset($_POST["delete"])){
 						</thead>
 						<tbody>
                         <?php
-                    $user=new User("","","","","","");
-                    $datas=$user->display();
+                    // $user=new User("","","","","","");
+                    $datas=User::display();
                     foreach ($datas as $data) {?>
                         
 						<tr>

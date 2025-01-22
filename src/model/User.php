@@ -56,7 +56,7 @@ class User{
         return $this->role;
     }
 
-   public function display(){
+   public static function display(){
         $sql = "SELECT * FROM user WHERE role != 'admin'";
         $conn=Database::getConnection();
         $stmt = $conn->prepare($sql);

@@ -36,5 +36,20 @@ class Admin extends User{
         ]);
 
     }
+    public static function totalUser(){
+        $total=Count(self::display());
+        return $total;
+    }
+    public static function totalUserRole($role){
+        $data = self::display();
+        $counter = 0;
+        foreach($data as $row){
+            if($row['role']==$role){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+    public static function 
 }
 ?>

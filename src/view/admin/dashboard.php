@@ -1,4 +1,6 @@
 <?php
+include __DIR__ . '/../../../vendor/autoload.php';
+use src\model\Admin;
 
 session_start();
 if(!isset($_SESSION["email"])){
@@ -9,6 +11,9 @@ if ($_SESSION["role"] != 'admin') {
 };
 include 'layouts/header.php';
 include 'layouts/sidebar.php';
+
+$totalUser=Admin::totalUser();
+
 ?>
 
 	<!-- CONTENT -->
@@ -54,116 +59,38 @@ include 'layouts/sidebar.php';
 				<li>
 					<i class='bx bxs-calendar-check'></i>
 					<span class="text">
-						<h3>1020</h3>
-						<p>New Order</p>
+						<h3><?php print_r(Admin::totalUserRole("teacher"));?></h3>
+						<p>Teachers</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>2834</h3>
+						<h3><?= $totalUser ?></h3>
 						<p>Users</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-dollar-circle' ></i>
 					<span class="text">
-						<h3>$2543</h3>
-						<p>Total Sales</p>
+						<h3><?php print_r(Admin::totalUserRole("student"));?></h3>
+						<p>Total Students</p>
 					</span>
 				</li>
+				<li>
+					<i class='bx bxs-calendar-check'></i>
+					<span class="text">
+						<h3></h3>
+						<p>le cours ayant top inscription</p>
+					</span>
+				</li>
+				
+				
+				
+				
+				
 			</ul>
 
-
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Recent Orders</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="todo">
-					<div class="head">
-						<h3>Todos</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<ul class="todo-list">
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-					</ul>
-				</div>
-			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
