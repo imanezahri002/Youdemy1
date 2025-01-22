@@ -50,3 +50,9 @@ ALTER TABLE cours
 ADD CONSTRAINT fk_cours_categorie
 FOREIGN KEY (category_id)
 REFERENCES categorie(id);
+--supprimer cours et tag 
+ALTER TABLE courstag
+ADD CONSTRAINT fk_cours_id
+FOREIGN KEY (idcours)
+REFERENCES cours(id)
+ON DELETE CASCADE;

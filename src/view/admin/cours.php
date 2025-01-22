@@ -81,10 +81,8 @@ if(isset($_POST["delete"])){
 								<?php
 									$course=new Teacher("","","","","","");
 									$courses=$course->displayCours();
-									 
 									foreach ($courses as $course) {
 										?>
-									
 							<tr>
 								<td><?php echo $course["titre"] ?></td>
 								<td><?php echo $course["description"] ?></td>

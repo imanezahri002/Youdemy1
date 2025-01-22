@@ -50,10 +50,9 @@ include 'layouts/sidebar.php';
 					</ul>
 				</div>
 			</div>
-
 			<ul class="box-info">
 				<li>
-					<i class='bx bxs-calendar-check' ></i>
+					<i class='bx bxs-calendar-check'></i>
 					<span class="text">
 						<h3>1020</h3>
 						<p>New Order</p>
@@ -63,7 +62,7 @@ include 'layouts/sidebar.php';
 					<i class='bx bxs-group' ></i>
 					<span class="text">
 						<h3>2834</h3>
-						<p>Visitors</p>
+						<p>Users</p>
 					</span>
 				</li>
 				<li>

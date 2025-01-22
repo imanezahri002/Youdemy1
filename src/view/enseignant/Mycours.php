@@ -60,7 +60,7 @@ if(isset($_POST["delete"])){
 				<img src="img/people.png">
 			</a>
 		</nav>
-        <main> 
+        <main>
 			<div class="head-title">
 				<div class="left">
 
@@ -189,8 +189,9 @@ if(isset($_POST["delete"])){
 						</thead>
 						<tbody>
 								<?php
+									$id=$_SESSION["userid"];
 									$course=new Teacher("","","","","","");
-									$courses=$course->displayCours();
+									$courses=$course->displayCours($id);
 									 
 									foreach ($courses as $course) {
 										?>
@@ -202,9 +203,9 @@ if(isset($_POST["delete"])){
 								<td><?php echo $course["type"] ?></td>
 								<td><span class="status completed"><?php echo $course["prix"] ?></span></td>
 								<td style="display:flex;justify-content:space-between"> 
-								<button type="submit" name="watching" style="border:none;background-color:none"><i class="fa-solid fa-eye fa-lg" style="color: #db504a;"></i>
-									<button type="submit" name="edit" style="border:none;background-color:none"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #3c91e6;"></i>
+									<a href="./details.php?id_detail=<?= $course['id']?>&&type=<?=$course['type']?>"><button type="submit" name="watching" style="border:none;background-color:none"><i class="fa-solid fa-eye fa-lg" style="color: #db504a;"></i></a>
 									<form action="#" method="POST">
+									<button type="submit" name="edit" style="border:none;background-color:none"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #3c91e6;"></i>
 										<input type="hidden" name="id_delete" value="<?php echo $course['id'];?>">
 								    <button type="submit" name="delete" style="border:none;background-color:none"><i class="fa-solid fa-trash fa-lg" style="color: #f31b1b;"></i></button>
 									</form>

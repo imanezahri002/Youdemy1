@@ -44,10 +44,8 @@ $current_page = basename($_SERVER['PHP_SELF']); //PHP_SELF:
                 <span class="text">Tags</span>
             </a>
         </li>
-       
     </ul>
     <ul class="side-menu">
-       
         <!-- Logout -->
         <li>
 

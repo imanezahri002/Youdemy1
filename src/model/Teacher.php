@@ -37,30 +37,23 @@ class Teacher extends User{
 
     }
 }
-    public function displayCours(){
-        $sql="SELECT c.id AS id,c.titre AS titre,c.description AS description,c.prix AS prix,c.type AS type,ca.nom AS nom FROM cours c INNER JOIN categorie ca ON c.category_id = ca.id;";
+    public function displayCours($id){
+        $sql="SELECT c.id AS id,c.titre AS titre,c.description AS description,c.prix AS prix,c.type AS type,ca.nom AS nom FROM cours c INNER JOIN categorie ca ON c.category_id = ca.id WHERE c.user_id=:id;";
         $conn=Database::getConnection();
         $stmt=$conn->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([
+            ":id"=>$id
+        ]);
         $cours=$stmt->fetchAll(PDO::FETCH_ASSOC);
         return $cours;
     }
     public function deleteCour($id){
-        //deleete from courstag
-        $sql1="DELETE FROM courstag WHERE idcours=:id";
-        $conn1=Database::getConnection();
-        $stmt1=$conn1->prepare($sql1);
-        $stmt1->execute([
-            ":id"=>$id
-        ]);
-        //delete from cours
         $sql2="DELETE FROM cours WHERE id=:id";
         $conn2=Database::getConnection();
         $stmt2=$conn2->prepare($sql2);
         $stmt2->execute([
             ":id"=>$id
         ]);
-
     }
 }
 ?>

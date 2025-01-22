@@ -2,8 +2,8 @@
 namespace src\model;
 include __DIR__ . '/../../vendor/autoload.php';
 use src\model\Database;
-use PDO;
-use Exception;
+// use PDO;
+// use Exception;
 abstract class Cour{
     protected $id;
     protected $titre;
@@ -55,6 +55,10 @@ abstract class Cour{
     public function setPrix($prix){
         $this->prix=$prix;
     }
-    abstract public function display();
+    public function setContenu($contenu){
+        $this->contenu=$contenu;
+    }
+    abstract public function displayContent();
+    
 }
 ?>

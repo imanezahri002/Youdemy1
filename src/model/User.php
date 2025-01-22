@@ -6,13 +6,13 @@ use src\model\Database;
 use PDO;
 use Exception;
 class User{
-    private $id;
-    private $firstname;
-    private $lastname;
-    private $email;
-    private $password;
-    private $role;
-    private $status;
+    protected $id;
+    protected $firstname;
+    protected $lastname;
+    protected $email;
+    protected $password;
+    protected $role;
+    protected $status;
 
    
         public function __construct($firstname,$lastname,$email,$password,$role,$status){
@@ -110,18 +110,15 @@ class User{
                 }else if($useR["role"]=="teacher" && $useR["status"]=="active"){
                     $_SESSION["message"]="";
                  header("location: ../view/enseignant/index.php");
-    
+
                }else if($useR["role"]=="student" && $useR["status"]=="active"){
                     $_SESSION["message"]="";
                 header ("location: ../view/etudiant/index.php");
                }else {
                 $_SESSION["message"]="veuillez attender l'activation de votre compte Merci pour votre comprehension";
                 header ("location: ../view/connexion.php");
-                 
                 }
-    
             }
-           
         }
         public static function logout() {
             session_destroy();

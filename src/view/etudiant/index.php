@@ -35,107 +35,26 @@ include './layouts/aside.php';
     <h1>HELLO <span style="color:#FD7238"><?php if(isset($_SESSION["userName"])){echo $_SESSION["userName"];}else{echo "";}?></span> </h1>
     <h2 class="titleC">Cours</h2>
     <div class="course-grid">
-        <!-- Carte de cours 1 -->
-        <div class="course-card">
-            <img class="course-thumbnail" src="cours-js-max.jpg" alt="">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 1</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : John Doe</span>
-                    <span class="course-price">49,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Développement Web</span>
-                    <span class="tag">JavaScript</span>
-                </div>
-                <button class="choose-button">Choisir</button>
-            </div>
-        </div>
 
         <!-- Carte de cours 2 -->
-        <div class="course-card">
-            <img class="course-thumbnail" src="https://via.placeholder.com/300x150" alt="Thumbnail du cours">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 2</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : Jane Smith</span>
-                    <span class="course-price">59,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <button class="choose-button">Choisir</button>
+            <div class="course-card">
+                    <img class="course-thumbnail" src="cours-js-max.jpg" alt="Thumbnail du cours">
+                    <div class="course-body">
+                        <h3 class="course-title">Titre du Cours 2</h3>
+                        <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
+                        <div class="course-meta">
+                            <span class="course-teacher">Enseignant : Jane Smith</span>
+                            <span class="course-price">59,99 €</span>
+                        </div>
+                        <div class="course-tags">
+                            <span class="tag">Design</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                        <button class="choose-button">S'inscrire</button>
+                    </div>
             </div>
-        </div>
-        <div class="course-card">
-            <img class="course-thumbnail" src="https://via.placeholder.com/300x150" alt="Thumbnail du cours">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 2</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : Jane Smith</span>
-                    <span class="course-price">59,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <button class="choose-button">Choisir</button>
-            </div>
-        </div>
-        <div class="course-card">
-            <img class="course-thumbnail" src="https://via.placeholder.com/300x150" alt="Thumbnail du cours">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 2</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : Jane Smith</span>
-                    <span class="course-price">59,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <button class="choose-button">Choisir</button>
-            </div>
-        </div>
-        <div class="course-card">
-            <img class="course-thumbnail" src="https://via.placeholder.com/300x150" alt="Thumbnail du cours">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 2</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : Jane Smith</span>
-                    <span class="course-price">59,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <button class="choose-button">Choisir</button>
-            </div>
-        </div>
-        <div class="course-card">
-            <img class="course-thumbnail" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7NtrHcD2iQuxgG1zBPeTz-fy5UwbEB3Z6WA&s" alt="Thumbnail du cours">
-            <div class="course-body">
-                <h3 class="course-title">Titre du Cours 2</h3>
-                <p class="course-description">Une brève description du cours. Ce cours couvre les bases de...</p>
-                <div class="course-meta">
-                    <span class="course-teacher">Enseignant : Jane Smith</span>
-                    <span class="course-price">59,99 €</span>
-                </div>
-                <div class="course-tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">UI/UX</span>
-                </div>
-                <button class="choose-button">Choisir</button>
-            </div>
-        </div>
 
-        <!-- Ajoute autant de cartes que nécessaire -->
+        
     </div>
 </main>
 </section>
