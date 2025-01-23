@@ -50,6 +50,19 @@ class Admin extends User{
         }
         return $counter;
     }
-    public static function 
+    public static function topcours(){
+        $sql="SELECT count(s.student_id) AS total,c.titre 
+            FROM subscription s JOIN cours c
+            ON s.cours_id=c.id 
+            GROUP BY c.titre
+            ORDER BY total DESC
+            LIMIT 1;";
+        $conn=Database::getConnection();
+        $stmt=$conn->prepare($sql);
+        $stmt->execute();
+        $top=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $top;
+
+    }
 }
 ?>

@@ -80,8 +80,12 @@ $totalUser=Admin::totalUser();
 				<li>
 					<i class='bx bxs-calendar-check'></i>
 					<span class="text">
-						<h3></h3>
-						<p>le cours ayant top inscription</p>
+						<h3>
+							<?php
+								$topcours = Admin::topcours();
+								echo $topcours[0]["total"].'</h3><p>'.$topcours[0]["titre"].'</p>';
+								?>
+							
 					</span>
 				</li>
 				
